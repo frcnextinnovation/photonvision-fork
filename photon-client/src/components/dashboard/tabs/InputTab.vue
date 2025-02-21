@@ -73,17 +73,8 @@ const interactiveCols = computed(() =>
 
 <template>
   <div>
-    <pv-switch
-      v-model="useCameraSettingsStore().currentPipelineSettings.cameraAutoExposure"
-      class="pt-2"
-      label="Auto Exposure"
-      :switch-cols="interactiveCols"
-      tooltip="Enables or Disables camera automatic adjustment for current lighting conditions"
-      @input="(args) => useCameraSettingsStore().changeCurrentPipelineSetting({ cameraAutoExposure: args }, false)"
-    />
     <pv-slider
       v-model="useCameraSettingsStore().currentPipelineSettings.cameraExposureRaw"
-      :disabled="useCameraSettingsStore().currentCameraSettings.pipelineSettings.cameraAutoExposure"
       label="Exposure"
       tooltip="Directly controls how long the camera shutter remains open. Units are dependant on the underlying driver."
       :min="useCameraSettingsStore().minExposureRaw"

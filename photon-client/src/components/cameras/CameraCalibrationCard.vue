@@ -355,16 +355,8 @@ const setSelectedVideoFormat = (format: VideoFormat) => {
           tooltip="Draw all snapshots"
           @input="(args) => useCameraSettingsStore().changeCurrentPipelineSetting({ drawAllSnapshots: args }, false)"
         />
-        <pv-switch
-          v-model="useCameraSettingsStore().currentPipelineSettings.cameraAutoExposure"
-          label="Auto Exposure"
-          :label-cols="4"
-          tooltip="Enables or Disables camera automatic adjustment for current lighting conditions"
-          @input="(args) => useCameraSettingsStore().changeCurrentPipelineSetting({ cameraAutoExposure: args }, false)"
-        />
         <pv-slider
           v-model="useCameraSettingsStore().currentPipelineSettings.cameraExposureRaw"
-          :disabled="useCameraSettingsStore().currentCameraSettings.pipelineSettings.cameraAutoExposure"
           label="Exposure"
           tooltip="Directly controls how long the camera shutter remains open. Units are dependant on the underlying driver."
           :min="useCameraSettingsStore().minExposureRaw"

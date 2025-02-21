@@ -4,59 +4,6 @@ import { useStateStore } from "@/stores/StateStore";
 import PvSelect from "@/components/common/pv-select.vue";
 import axios from "axios";
 
-const restartProgram = () => {
-  axios
-    .post("/utils/restartProgram")
-    .then(() => {
-      useStateStore().showSnackbarMessage({
-        message: "Successfully sent program restart request",
-        color: "success"
-      });
-    })
-    .catch((error) => {
-      // This endpoint always return 204 regardless of outcome
-      if (error.request) {
-        useStateStore().showSnackbarMessage({
-          message: "Error while trying to process the request! The backend didn't respond.",
-          color: "error"
-        });
-      } else {
-        useStateStore().showSnackbarMessage({
-          message: "An error occurred while trying to process the request.",
-          color: "error"
-        });
-      }
-    });
-};
-const restartDevice = () => {
-  axios
-    .post("/utils/restartDevice")
-    .then(() => {
-      useStateStore().showSnackbarMessage({
-        message: "Successfully dispatched the restart command. It isn't confirmed if a device restart will occur.",
-        color: "success"
-      });
-    })
-    .catch((error) => {
-      if (error.response) {
-        useStateStore().showSnackbarMessage({
-          message: "The backend is unable to fulfil the request to restart the device.",
-          color: "error"
-        });
-      } else if (error.request) {
-        useStateStore().showSnackbarMessage({
-          message: "Error while trying to process the request! The backend didn't respond.",
-          color: "error"
-        });
-      } else {
-        useStateStore().showSnackbarMessage({
-          message: "An error occurred while trying to process the request.",
-          color: "error"
-        });
-      }
-    });
-};
-
 const address = inject<string>("backendHost");
 
 const offlineUpdate = ref();
@@ -241,18 +188,6 @@ const nukePhotonConfigDirectory = () => {
     <v-card-title class="pa-6">Device Control</v-card-title>
     <div class="pa-6 pt-0">
       <v-row>
-        <v-col cols="12" lg="4" md="6">
-          <v-btn color="error" @click="restartProgram">
-            <v-icon left class="open-icon"> mdi-restart </v-icon>
-            <span class="open-label">Restart PhotonVision</span>
-          </v-btn>
-        </v-col>
-        <v-col cols="12" lg="4" md="6">
-          <v-btn color="error" @click="restartDevice">
-            <v-icon left class="open-icon"> mdi-restart-alert </v-icon>
-            <span class="open-label">Restart Device</span>
-          </v-btn>
-        </v-col>
         <v-col cols="12" lg="4">
           <v-btn color="secondary" @click="openOfflineUpdatePrompt">
             <v-icon left class="open-icon"> mdi-upload </v-icon>

@@ -272,8 +272,8 @@ export const DefaultArucoPipelineSettings: ArucoPipelineSettings = {
   cameraGain: 75,
   outputShowMultipleTargets: true,
   targetModel: TargetModel.AprilTag6p5in_36h11,
-  cameraExposureRaw: -1,
-  cameraAutoExposure: true,
+  cameraExposureRaw: 20,
+  cameraAutoExposure: false,
   ledMode: false,
   pipelineType: PipelineType.Aruco,
 
